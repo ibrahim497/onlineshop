@@ -10,10 +10,13 @@ class AdminController extends Controller{
     }
 
     public function index(){
+
+
         return view('admin.dashboard.home');
     }
 
     public function access(){
         echo "You are not allow this page!";
+      
     }
 }

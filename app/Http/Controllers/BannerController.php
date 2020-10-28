@@ -35,6 +35,7 @@ class BannerController extends Controller{
     }
 
     public function insert(Request $request){
+
         $this->validate($request,[
             'title'=>'required|min:10',
             'subtitle'=>'required',
@@ -45,6 +46,7 @@ class BannerController extends Controller{
             'subtitle.required'=>'Please enter banner subtitle!',
             'pic.required'=>'Please enter banner image!',
         ]);
+        
         $slugTitle=Str::slug($request['title'], '-');
         $slug=rand(100,10000).'-'.$slugTitle;
 
@@ -61,7 +63,6 @@ class BannerController extends Controller{
           $image=$request->file('pic');
           $imageName='banner_'.$insert.'_'.time().'.'.$image->getClientOriginalExtension();
           Image::make($image)->save('uploads/'.$imageName);
-
           Banner::where('ban_id',$insert)->update([
               'ban_image'=>$imageName
           ]);
